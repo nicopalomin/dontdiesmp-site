@@ -37,16 +37,20 @@ async function handleRequest(request) {
   const notifyEmail = (body.notifyEmail || "").trim();
   const foundVia = (body.foundVia || "").trim();
   const token = (body["cf-turnstile-response"] || "").trim();
+  const agree = (body.agree || "").trim(); // you can ignore it later
 
-  if (!email || !minecraft || !foundVia) return json({ error: "Missing required fields." }, 400);
+
+  if (!minecraft || !foundVia) return json({ error: "Missing required fields." }, 400);
 
   if (!/^[A-Za-z0-9_]{3,16}$/.test(minecraft)) {
     return json({ error: "Invalid Minecraft username." }, 400);
   }
 
-  if (email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    return json({ error: "Invalid email." }, 400);
+if (email && (email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))) {
+  return json({ error: "Invalid email." }, 400);
   }
+
+
 
   if (foundVia.length > 500) return json({ error: "Message too long." }, 400);
 

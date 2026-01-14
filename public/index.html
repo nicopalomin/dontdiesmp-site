@@ -4,62 +4,146 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Don't Die! SMP — Whitelist Application</title>
+  <meta name="description" content="Apply to join Don't Die! SMP — a hardcore Minecraft SMP where death is permanent." />
   <link rel="stylesheet" href="/styles.css" />
+  <link rel="icon" href="data:,">
   <!-- Cloudflare Turnstile -->
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
+
 <body>
-  <main class="container">
-    <header class="header">
-      <h1>Don't Die! SMP</h1>
-      <p class="subtitle">Whitelist Application</p>
-      <p class="note">I try my best to whitelist new applicants quickly!<br><span class="sig">– Ocintac</span></p>
-    </header>
+  <div class="bg">
+    <div class="bg__stars"></div>
+    <div class="bg__haze"></div>
+  </div>
 
-    <section class="card">
-      <form id="applyForm">
-        <label>
-          Email <span class="required">*</span>
-          <input name="email" type="email" required placeholder="you@example.com" autocomplete="email" />
-        </label>
+  <header class="topbar">
+    <div class="topbar__inner">
+      <a class="brand" href="/">
+        <span class="brand__logo" aria-hidden="true">⛏️</span>
+        <span class="brand__text">
+          <span class="brand__title">Don't Die! SMP</span>
+          <span class="brand__tag">Hardcore • Community • Permadeath</span>
+        </span>
+      </a>
 
-        <label>
-          Minecraft username <span class="required">*</span>
-          <input name="minecraft" type="text" required minlength="3" maxlength="16"
-                 placeholder="e.g. Steve" autocomplete="off" />
-          <small>Minecraft usernames are 3–16 characters.</small>
-        </label>
+      <nav class="nav">
+        <a href="/privacy.html">Privacy</a>
+        <a href="/terms.html">Terms</a>
+      </nav>
+    </div>
+  </header>
 
-        <label>
-          Discord Username (optional whitelist notification)
-          <input name="discord" type="text" maxlength="64" placeholder="name or name#1234" autocomplete="off" />
-        </label>
+  <main class="wrap">
+    <section class="hero card">
+      <div class="hero__left">
+        <h1 class="hero__title">Whitelist Application</h1>
+        <p class="hero__copy">
+          Welcome! If you’re here, you probably love the thrill of hardcore Minecraft.
+          Fill this out and we’ll review it as soon as we can. 💚
+        </p>
 
-        <label>
-          Reddit Username (optional whitelist notification)
-          <input name="reddit" type="text" maxlength="64" placeholder="u/yourname" autocomplete="off" />
-        </label>
+        <ul class="bullets">
+          <li><strong>Hardcore server:</strong> if you die, you’re out.</li>
+          <li><strong>Be kind:</strong> respect others and keep it fun.</li>
+          <li><strong>Fast review:</strong> we try to whitelist quickly.</li>
+        </ul>
 
-        <label>
-          Email (optional whitelist notification)
-          <input name="notifyEmail" type="email" maxlength="254" placeholder="optional second email" autocomplete="off" />
-        </label>
+        <p class="hero__sig">— Ocintac</p>
+      </div>
 
-        <label>
-          How did you find Don't Die! SMP? <span class="required">*</span>
-          <textarea name="foundVia" required maxlength="500" placeholder="Reddit, friend, TikTok, Discord, etc."></textarea>
-        </label>
+      <div class="hero__right" aria-hidden="true">
+        <div class="pixel-art">
+          <div class="pixel-art__row"></div>
+          <div class="pixel-art__row"></div>
+          <div class="pixel-art__row"></div>
+        </div>
+        <div class="badge">
+          <div class="badge__top">Server Rule</div>
+          <div class="badge__big">DON’T DIE</div>
+          <div class="badge__sub">permadeath enabled</div>
+        </div>
+      </div>
+    </section>
 
-        <!-- Turnstile widget -->
-        <div class="cf-turnstile" data-sitekey="0x4AAAAAACMWpvkdyQqmLn13"></div>
+    <section class="card formcard">
+      <h2 class="card__title">Your info</h2>
+      <p class="card__sub">
+        We only use this to review your whitelist request. See our
+        <a href="/privacy.html">Privacy Policy</a>.
+      </p>
 
-        <button id="submitBtn" type="submit">Submit application</button>
+      <form id="applyForm" class="form">
+        <div class="grid">
+          <label class="field">
+            <span class="field__label">Minecraft username <span class="req">*</span></span>
+            <input name="minecraft" type="text" required minlength="3" maxlength="16"
+                   placeholder="e.g. Steve" autocomplete="off" />
+            <span class="field__hint">3–16 chars. Letters, numbers, underscore.</span>
+          </label>
+
+          <label class="field">
+            <span class="field__label">How did you find Don't Die! SMP? <span class="req">*</span></span>
+            <input name="foundVia" type="text" required maxlength="200"
+                   placeholder="Reddit, friend, TikTok, Discord, etc." autocomplete="off" />
+          </label>
+
+          <label class="field">
+            <span class="field__label">Discord username <span class="opt">(optional)</span></span>
+            <input name="discord" type="text" maxlength="64"
+                   placeholder="name or name#1234" autocomplete="off" />
+          </label>
+
+          <label class="field">
+            <span class="field__label">Reddit username <span class="opt">(optional)</span></span>
+            <input name="reddit" type="text" maxlength="64"
+                   placeholder="u/yourname" autocomplete="off" />
+          </label>
+
+          <label class="field full">
+            <span class="field__label">Email <span class="opt">(optional)</span></span>
+            <input name="email" type="email" maxlength="254"
+                   placeholder="you@example.com" autocomplete="email" />
+            <span class="field__hint">Optional—only used if you want us to contact you.</span>
+          </label>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="legal">
+          <label class="check">
+            <input type="checkbox" name="agree" required />
+            <span>
+              I agree to the <a href="/terms.html" target="_blank" rel="noopener">Terms of Service</a>
+              and understand this is a <strong>hardcore</strong> server.
+              <span class="req">*</span>
+            </span>
+          </label>
+        </div>
+
+        <!-- Turnstile -->
+        <div class="turnstile">
+          <div class="cf-turnstile" data-sitekey="0x4AAAAAACMWpvkdyQqmLn13"></div>
+        </div>
+
+        <button id="submitBtn" class="btn" type="submit">
+          <span class="btn__icon" aria-hidden="true">🧱</span>
+          Submit application
+        </button>
+
         <p id="status" class="status" role="status" aria-live="polite"></p>
       </form>
     </section>
 
     <footer class="footer">
-      <small>© Don't Die! SMP</small>
+      <div class="footer__inner">
+        <div class="footer__links">
+          <a href="/privacy.html">Privacy Policy</a>
+          <span class="sep">•</span>
+          <a href="/terms.html">Terms of Service</a>
+        </div>
+        <small>© <span id="year"></span> Don't Die! SMP</small>
+      </div>
     </footer>
   </main>
 
