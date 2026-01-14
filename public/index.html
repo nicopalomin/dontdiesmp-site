@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Don't Die! SMP — Whitelist Application</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <!-- Cloudflare Turnstile -->
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+</head>
+<body>
+  <main class="container">
+    <header class="header">
+      <h1>Don't Die! SMP</h1>
+      <p class="subtitle">Whitelist Application</p>
+      <p class="note">I try my best to whitelist new applicants quickly!<br><span class="sig">– Ocintac</span></p>
+    </header>
+
+    <section class="card">
+      <form id="applyForm">
+        <label>
+          Email <span class="required">*</span>
+          <input name="email" type="email" required placeholder="you@example.com" autocomplete="email" />
+        </label>
+
+        <label>
+          Minecraft username <span class="required">*</span>
+          <input name="minecraft" type="text" required minlength="3" maxlength="16"
+                 placeholder="e.g. Steve" autocomplete="off" />
+          <small>Minecraft usernames are 3–16 characters.</small>
+        </label>
+
+        <label>
+          Discord Username (optional whitelist notification)
+          <input name="discord" type="text" maxlength="64" placeholder="name or name#1234" autocomplete="off" />
+        </label>
+
+        <label>
+          Reddit Username (optional whitelist notification)
+          <input name="reddit" type="text" maxlength="64" placeholder="u/yourname" autocomplete="off" />
+        </label>
+
+        <label>
+          Email (optional whitelist notification)
+          <input name="notifyEmail" type="email" maxlength="254" placeholder="optional second email" autocomplete="off" />
+        </label>
+
+        <label>
+          How did you find Don't Die! SMP? <span class="required">*</span>
+          <textarea name="foundVia" required maxlength="500" placeholder="Reddit, friend, TikTok, Discord, etc."></textarea>
+        </label>
+
+        <!-- Turnstile widget -->
+        <div class="cf-turnstile" data-sitekey="0x4AAAAAACMWpvkdyQqmLn13"></div>
+
+        <button id="submitBtn" type="submit">Submit application</button>
+        <p id="status" class="status" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <footer class="footer">
+      <small>© Don't Die! SMP</small>
+    </footer>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>

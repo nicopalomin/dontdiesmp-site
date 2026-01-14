@@ -1,0 +1,12 @@
+name = "dontdiesmp-worker"
+main = "/Users/nico/Downloads/dontdiesmp/worker/src/index.js"
+compatibility_date = "2025-01-01"
+
+# We'll route it under the same domain as Pages:
+# https://www.dontdiesmp.com/api/*
+routes = [
+  { pattern = "www.dontdiesmp.com/api/*", zone_name = "dontdiesmp.com" }
+]
+
+[vars]
+ENV = "prod"
