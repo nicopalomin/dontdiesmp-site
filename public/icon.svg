@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <rect width="256" height="256" rx="48" fill="#0b1220"></rect>
+  <g opacity="0.95">
+    <rect x="36" y="44" width="184" height="168" rx="28" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.14)" stroke-width="4"></rect>
+  </g>
+
+  <!-- pixel heart -->
+  <g transform="translate(66 64)">
+    <rect x="18" y="0" width="18" height="18" fill="#ff6b6b"></rect>
+    <rect x="54" y="0" width="18" height="18" fill="#ff6b6b"></rect>
+    <rect x="0" y="18" width="18" height="18" fill="#ff6b6b"></rect>
+    <rect x="18" y="18" width="72" height="18" fill="#ff6b6b"></rect>
+    <rect x="90" y="18" width="18" height="18" fill="#ff6b6b"></rect>
+    <rect x="18" y="36" width="72" height="18" fill="#ff6b6b"></rect>
+    <rect x="36" y="54" width="36" height="18" fill="#ff6b6b"></rect>
+    <rect x="54" y="72" width="0" height="0" fill="#ff6b6b"></rect>
+  </g>
+
+  <!-- pixel pickaxe -->
+  <g transform="translate(78 120)" fill="#b7ff4a">
+    <rect x="18" y="0" width="18" height="18"></rect>
+    <rect x="36" y="0" width="18" height="18"></rect>
+    <rect x="54" y="0" width="18" height="18"></rect>
+    <rect x="72" y="18" width="18" height="18"></rect>
+    <rect x="0" y="18" width="18" height="18"></rect>
+    <rect x="36" y="18" width="18" height="18"></rect>
+    <rect x="36" y="36" width="18" height="18" fill="#ffd86b"></rect>
+    <rect x="36" y="54" width="18" height="18" fill="#ffd86b"></rect>
+    <rect x="36" y="72" width="18" height="18" fill="#ffd86b"></rect>
+    <rect x="36" y="90" width="18" height="18" fill="#ffd86b"></rect>
+  </g>
+
+  <text x="128" y="214" text-anchor="middle" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial" font-size="18" fill="rgba(234,241,255,0.9)" font-weight="900">
+    DON'T DIE
+  </text>
+</svg>

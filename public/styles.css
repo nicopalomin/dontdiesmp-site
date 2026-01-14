@@ -1,4 +1,3 @@
-/* Minecraft-y, friendly, blocky-ish vibe without external fonts */
 :root{
   --bg: #0b1220;
   --card: rgba(255,255,255,0.06);
@@ -6,7 +5,6 @@
   --stroke: rgba(255,255,255,0.10);
   --text: #eaf1ff;
   --muted: rgba(234,241,255,0.75);
-  --green: #49ff9a;
   --lime: #b7ff4a;
   --gold: #ffd86b;
   --red: #ff6b6b;
@@ -39,18 +37,19 @@ body{
 .bg__haze{
   position:absolute; inset:-80px;
   background:
-    radial-gradient(600px 360px at 25% 15%, rgba(73,255,154,0.18), rgba(0,0,0,0) 60%),
-    radial-gradient(520px 380px at 80% 35%, rgba(183,255,74,0.12), rgba(0,0,0,0) 65%),
-    radial-gradient(520px 420px at 55% 85%, rgba(255,216,107,0.10), rgba(0,0,0,0) 60%);
+    radial-gradient(600px 360px at 25% 15%, rgba(183,255,74,0.15), rgba(0,0,0,0) 60%),
+    radial-gradient(520px 380px at 80% 35%, rgba(255,216,107,0.10), rgba(0,0,0,0) 65%),
+    radial-gradient(520px 420px at 55% 85%, rgba(183,255,74,0.10), rgba(0,0,0,0) 60%);
   filter: blur(10px);
-  opacity: 0.9;
+  opacity: 0.95;
 }
 
+/* Topbar */
 .topbar{
   position: sticky;
   top:0;
   backdrop-filter: blur(10px);
-  background: rgba(11,18,32,0.7);
+  background: rgba(11,18,32,0.72);
   border-bottom: 1px solid rgba(255,255,255,0.08);
   z-index: 5;
 }
@@ -75,10 +74,12 @@ body{
   width:40px; height:40px;
   display:grid; place-items:center;
   border-radius: 10px;
-  background: linear-gradient(180deg, rgba(73,255,154,0.25), rgba(255,255,255,0.04));
+  background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
   border: 1px solid rgba(255,255,255,0.10);
   box-shadow: 0 10px 22px rgba(0,0,0,0.35);
+  overflow:hidden;
 }
+.brand__logo img{ width:100%; height:100%; display:block; }
 .brand__title{
   display:block;
   font-weight: 900;
@@ -93,12 +94,13 @@ body{
 
 .nav{
   display:flex;
-  gap: 12px;
+  gap: 10px;
+  align-items:center;
 }
 .nav a{
   color: var(--text);
   text-decoration:none;
-  font-weight: 700;
+  font-weight: 800;
   font-size: 14px;
   padding: 8px 10px;
   border-radius: 12px;
@@ -108,7 +110,16 @@ body{
   border-color: rgba(255,255,255,0.10);
   background: rgba(255,255,255,0.04);
 }
+.nav__discord{
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.16) !important;
+}
+.nav__discord:hover{
+  border-color: rgba(255,216,107,0.55) !important;
+  background: rgba(255,216,107,0.10);
+}
 
+/* Layout */
 .wrap{
   max-width: 980px;
   margin: 0 auto;
@@ -154,6 +165,7 @@ body{
   color: rgba(234,241,255,0.80);
   font-weight: 800;
 }
+.hero__cta{ margin-top: 14px; display:flex; gap:10px; flex-wrap:wrap; }
 
 .hero__right{
   display:flex;
@@ -168,8 +180,8 @@ body{
   background:
     linear-gradient(90deg, rgba(0,0,0,0.0) 0%, rgba(0,0,0,0.12) 100%),
     repeating-linear-gradient(0deg, rgba(255,255,255,0.06) 0 10px, rgba(255,255,255,0.02) 10px 20px),
-    radial-gradient(500px 220px at 40% 30%, rgba(73,255,154,0.22), rgba(0,0,0,0) 60%),
-    radial-gradient(500px 260px at 80% 60%, rgba(183,255,74,0.16), rgba(0,0,0,0) 60%);
+    radial-gradient(500px 220px at 40% 30%, rgba(183,255,74,0.22), rgba(0,0,0,0) 60%),
+    radial-gradient(500px 260px at 80% 60%, rgba(255,216,107,0.16), rgba(0,0,0,0) 60%);
   padding: 18px;
   box-shadow: 0 14px 28px rgba(0,0,0,0.35);
 }
@@ -179,7 +191,7 @@ body{
   border-radius: 8px;
   background:
     linear-gradient(90deg,
-      rgba(73,255,154,0.35) 0%,
+      rgba(183,255,74,0.35) 0%,
       rgba(255,216,107,0.20) 45%,
       rgba(183,255,74,0.30) 100%);
   opacity: 0.9;
@@ -202,6 +214,7 @@ body{
 }
 .badge__sub{ margin-top: 4px; opacity: 0.8; }
 
+/* Form */
 .formcard{ margin-top: 16px; }
 .card__title{ margin: 0 0 6px; font-size: 20px; }
 .card__sub{ margin: 0 0 14px; color: var(--muted); }
@@ -220,7 +233,7 @@ body{
 .field.full{ grid-column: 1 / -1; }
 .field__label{ font-weight: 900; }
 .req{ color: var(--red); font-weight: 900; }
-.opt{ color: rgba(234,241,255,0.65); font-weight: 700; }
+.opt{ color: rgba(234,241,255,0.65); font-weight: 800; }
 
 input{
   width:100%;
@@ -232,8 +245,8 @@ input{
   outline: none;
 }
 input:focus{
-  border-color: rgba(73,255,154,0.55);
-  box-shadow: 0 0 0 4px rgba(73,255,154,0.12);
+  border-color: rgba(183,255,74,0.55);
+  box-shadow: 0 0 0 4px rgba(183,255,74,0.12);
 }
 .field__hint{ font-size: 12px; color: rgba(234,241,255,0.65); }
 
@@ -255,13 +268,13 @@ input:focus{
 
 .turnstile{ margin: 10px 0 6px; }
 
+/* Buttons */
 .btn{
   width:100%;
   padding: 12px 14px;
   border-radius: 16px;
   border: 1px solid rgba(255,255,255,0.14);
-  background:
-    linear-gradient(180deg, rgba(73,255,154,0.25), rgba(255,255,255,0.06));
+  background: linear-gradient(180deg, rgba(183,255,74,0.25), rgba(255,255,255,0.06));
   color: var(--text);
   font-weight: 1000;
   cursor:pointer;
@@ -271,13 +284,26 @@ input:focus{
   justify-content:center;
   gap:10px;
   box-shadow: 0 18px 32px rgba(0,0,0,0.35);
+  text-decoration:none;
 }
 .btn:hover{
-  border-color: rgba(73,255,154,0.45);
+  border-color: rgba(183,255,74,0.45);
   transform: translateY(-1px);
 }
 .btn:disabled{ opacity: 0.6; cursor:not-allowed; transform:none; }
 .btn__icon{ filter: drop-shadow(0 6px 10px rgba(0,0,0,0.35)); }
+
+.btn--secondary{
+  width: auto;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.16);
+}
+.btn--secondary:hover{
+  border-color: rgba(255,216,107,0.55);
+  background: rgba(255,216,107,0.10);
+}
 
 .status{
   margin: 12px 0 0;
@@ -285,10 +311,8 @@ input:focus{
   color: rgba(234,241,255,0.88);
 }
 
-.footer{
-  margin-top: 16px;
-  opacity: 0.9;
-}
+/* Footer / Docs */
+.footer{ margin-top: 16px; opacity: 0.95; }
 .footer__inner{
   max-width: 980px;
   margin: 0 auto;
@@ -299,7 +323,7 @@ input:focus{
   gap: 10px;
   flex-wrap: wrap;
 }
-.footer__links a{ color: rgba(234,241,255,0.82); text-decoration:none; font-weight: 800; }
+.footer__links a{ color: rgba(234,241,255,0.82); text-decoration:none; font-weight: 900; }
 .footer__links a:hover{ color: var(--gold); }
 .sep{ opacity: 0.5; padding: 0 8px; }
 
