@@ -9,6 +9,47 @@ function setStatus(msg) {
   statusEl.textContent = msg || "";
 }
 
+/**
+ * Click-to-copy Server IP
+ * Expects a button like:
+ * <button class="server-ip__value" data-ip="play.dontdiesmp.com">play.dontdiesmp.com</button>
+ */
+document.querySelectorAll(".server-ip__value").forEach((btn) => {
+  btn.addEventListener("click", async () => {
+    const ip = btn.dataset.ip || btn.textContent.trim();
+    if (!ip) return;
+
+    // Prefer modern clipboard API
+    try {
+      await navigator.clipboard.writeText(ip);
+      const original = btn.textContent;
+      btn.textContent = "Copied!";
+      btn.disabled = true;
+      setTimeout(() => {
+        btn.textContent = original;
+        btn.disabled = false;
+      }, 1200);
+      return;
+    } catch {
+      // Fallback for older browsers / permissions
+      try {
+        const temp = document.createElement("input");
+        temp.value = ip;
+        temp.setAttribute("readonly", "");
+        temp.style.position = "absolute";
+        temp.style.left = "-9999px";
+        document.body.appendChild(temp);
+        temp.select();
+        document.execCommand("copy");
+        document.body.removeChild(temp);
+        alert("Copied: " + ip);
+      } catch {
+        alert("Copy failed. Server IP: " + ip);
+      }
+    }
+  });
+});
+
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
   setStatus("");
