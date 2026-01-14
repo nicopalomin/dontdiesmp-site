@@ -5,149 +5,118 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Don't Die! SMP — Whitelist Application</title>
   <meta name="description" content="Apply to join Don't Die! SMP — a hardcore Minecraft SMP where death is permanent." />
+
   <link rel="stylesheet" href="/styles.css" />
   <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+
   <!-- Cloudflare Turnstile -->
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 
 <body>
-  <div class="bg">
-    <div class="bg__stars"></div>
-    <div class="bg__haze"></div>
-  </div>
-
   <header class="topbar">
     <div class="topbar__inner">
-      <a class="brand" href="/">
-        <span class="brand__logo" aria-hidden="true">
+      <a class="brand" href="/" aria-label="Don't Die! SMP home">
+        <span class="brand__mark">
           <img src="/icon.svg" alt="" />
         </span>
-        <span class="brand__text">
-          <span class="brand__title">Don't Die! SMP</span>
-          <span class="brand__tag">Hardcore • Community • Permadeath</span>
-        </span>
+        <span class="brand__name">Don't Die! SMP</span>
       </a>
 
-      <nav class="nav">
-        <a class="nav__discord" href="https://discord.gg/dontdiesmp" target="_blank" rel="noopener">Join Discord</a>
-        <a href="/privacy.html">Privacy</a>
-        <a href="/terms.html">Terms</a>
-      </nav>
+      <div class="topbar__actions">
+        <button type="button" class="pill pill--copy server-ip__value" data-ip="play.dontdiesmp.com">
+          <span class="pill__label">Server IP</span>
+          <span class="pill__value">play.dontdiesmp.com</span>
+          <span class="pill__hint">Click to copy</span>
+        </button>
+
+        <a class="btn btn--primary" href="https://discord.gg/dontdiesmp" target="_blank" rel="noopener">
+          Join Discord
+        </a>
+      </div>
     </div>
   </header>
 
-  <main class="wrap">
-    <section class="hero card">
-        <div class="server-ip">
-            <span class="server-ip__label">Server IP</span>
-            <button type="button"
-                class="server-ip__value"
-                data-ip="play.dontdiesmp.com"
-                aria-label="Copy server IP">
-              play.dontdiesmp.com
-            </button>
-            <span class="server-ip__hint">Click to copy</span>
-        </div>
-      <div class="hero__left">
+  <main class="page">
+    <section class="hero">
+      <div class="hero__content">
         <h1 class="hero__title">Whitelist Application</h1>
-        <p class="hero__copy">
-          Welcome! Fill this out to apply. We’ll review it as soon as we can. 💚
+        <p class="hero__subtitle">
+          Hardcore SMP. Permadeath rules. Friendly community.
         </p>
 
-        <ul class="bullets">
-          <li><strong>Hardcore server:</strong> if you die, you’re out.</li>
-          <li><strong>Be kind:</strong> respect other players and keep it fun.</li>
-          <li><strong>Fast review:</strong> we try to whitelist quickly.</li>
-        </ul>
-
-        <div class="hero__cta">
-          <a class="btn btn--secondary" href="https://discord.gg/dontdiesmp" target="_blank" rel="noopener">
-            💬 Join Discord
-          </a>
-        </div>
-
-        <p class="hero__sig">— Ocintac</p>
-      </div>
-
-      <div class="hero__right" aria-hidden="true">
-        <div class="pixel-art">
-          <div class="pixel-art__row"></div>
-          <div class="pixel-art__row"></div>
-          <div class="pixel-art__row"></div>
-        </div>
-        <div class="badge">
-          <div class="badge__top">Server Rule</div>
-          <div class="badge__big">DON’T DIE</div>
-          <div class="badge__sub">permadeath enabled</div>
+        <div class="notice">
+          <div class="notice__dot" aria-hidden="true"></div>
+          <div class="notice__text">
+            Join the discord server to get notified when you are whitelisted.
+          </div>
+          <a class="notice__link" href="https://discord.gg/dontdiesmp" target="_blank" rel="noopener">Open Discord</a>
         </div>
       </div>
     </section>
 
-    <section class="card formcard">
-      <h2 class="card__title">Your info</h2>
-      <p class="card__sub">
-        We only use this to review your whitelist request. See our
-        <a href="/privacy.html">Privacy Policy</a>.
-      </p>
+    <section class="card">
+      <div class="card__head">
+        <h2 class="card__title">Apply</h2>
+        <p class="card__desc">
+          Fill this out and we’ll review it as soon as we can.
+        </p>
+      </div>
 
       <form id="applyForm" class="form">
-        <div class="grid">
+        <div class="form__grid">
           <label class="field">
             <span class="field__label">Minecraft username <span class="req">*</span></span>
-            <input name="minecraft" type="text" required minlength="3" maxlength="16"
-                   placeholder="e.g. Steve" autocomplete="off" />
-            <span class="field__hint">3–16 chars. Letters, numbers, underscore.</span>
-          </label>
-
-          <label class="field">
-            <span class="field__label">How did you find Don't Die! SMP? <span class="opt">(optional)</span></span>
-            <input name="foundVia" type="text" maxlength="200"
-                   placeholder="Reddit, friend, TikTok, Discord, etc." autocomplete="off" />
+            <input
+              name="minecraft"
+              type="text"
+              required
+              minlength="3"
+              maxlength="16"
+              autocomplete="off"
+              placeholder="e.g. Steve"
+            />
+            <span class="field__hint">3–16 chars: letters, numbers, underscore.</span>
           </label>
 
           <label class="field">
             <span class="field__label">Discord username <span class="opt">(optional)</span></span>
-            <input name="discord" type="text" maxlength="64"
-                   placeholder="name or name#1234" autocomplete="off" />
+            <input
+              name="discord"
+              type="text"
+              maxlength="64"
+              autocomplete="off"
+              placeholder="e.g. name or name#1234"
+            />
+            <span class="field__hint">Recommended so we can notify you faster.</span>
           </label>
 
-          <label class="field">
-            <span class="field__label">Reddit username <span class="opt">(optional)</span></span>
-            <input name="reddit" type="text" maxlength="64"
-                   placeholder="u/yourname" autocomplete="off" />
-          </label>
-
-          <label class="field full">
-            <span class="field__label">Email <span class="opt">(optional)</span></span>
-            <input name="email" type="email" maxlength="254"
-                   placeholder="you@example.com" autocomplete="email" />
-            <span class="field__hint">Optional—only used if you want us to contact you.</span>
-          </label>
-        </div>
-
-        <div class="divider"></div>
-
-        <div class="legal">
-          <label class="check">
-            <input type="checkbox" name="agree" required />
-            <span>
-              I agree to the <a href="/terms.html" target="_blank" rel="noopener">Terms of Service</a>
-              and understand this is a <strong>hardcore</strong> server.
-              <span class="req">*</span>
-            </span>
+          <label class="field field--full">
+            <span class="field__label">How did you find Don't Die! SMP? <span class="opt">(optional)</span></span>
+            <input
+              name="foundVia"
+              type="text"
+              maxlength="200"
+              autocomplete="off"
+              placeholder="Reddit, friend, TikTok, Discord, etc."
+            />
           </label>
         </div>
 
-        <div class="turnstile">
+        <div class="form__row">
           <!-- Replace __TURNSTILE_SITE_KEY__ with your real site key -->
           <div class="cf-turnstile" data-sitekey="0x4AAAAAACMWpvkdyQqmLn13"></div>
         </div>
 
-        <button id="submitBtn" class="btn" type="submit">
-          <span class="btn__icon" aria-hidden="true">🧱</span>
-          Submit application
-        </button>
+        <div class="form__actions">
+          <button id="submitBtn" class="btn btn--accent" type="submit">
+            Submit application
+          </button>
+
+          <p class="form__legal">
+            By submitting, you agree to our <a href="/terms.html">Terms</a>. See <a href="/privacy.html">Privacy</a>.
+          </p>
+        </div>
 
         <p id="status" class="status" role="status" aria-live="polite"></p>
       </form>
@@ -156,11 +125,11 @@
     <footer class="footer">
       <div class="footer__inner">
         <div class="footer__links">
-          <a href="https://discord.gg/dontdiesmp" target="_blank" rel="noopener">Join Discord</a>
-          <span class="sep">•</span>
           <a href="/privacy.html">Privacy Policy</a>
           <span class="sep">•</span>
           <a href="/terms.html">Terms of Service</a>
+          <span class="sep">•</span>
+          <a href="https://discord.gg/dontdiesmp" target="_blank" rel="noopener">Discord</a>
         </div>
         <small>© <span id="year"></span> Don't Die! SMP</small>
       </div>

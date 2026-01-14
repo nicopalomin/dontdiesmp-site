@@ -7,9 +7,7 @@ async function router(request) {
     const url = new URL(request.url);
 
     if (request.method === "OPTIONS") return handleOptions(request);
-
     if (url.pathname !== "/api/apply") return json({ error: "Not found" }, 404);
-
     if (request.method !== "POST") return json({ error: "Method not allowed" }, 405);
 
     const contentType = request.headers.get("content-type") || "";
@@ -27,24 +25,18 @@ async function router(request) {
       return json({ error: "Invalid JSON" }, 400);
     }
 
+    // Only these fields exist now
     const minecraft = (body.minecraft || "").trim();
-    const foundVia = (body.foundVia || "").trim(); // optional now
-    const discord = (body.discord || "").trim();
-    const reddit = (body.reddit || "").trim();
-    const email = (body.email || "").trim();
+    const discord = (body.discord || "").trim();       // optional
+    const foundVia = (body.foundVia || "").trim();     // optional
     const token = (body["cf-turnstile-response"] || "").trim();
 
-    // Only minecraft is required
-    if (!minecraft) {
-      return json({ error: "Missing required fields." }, 400);
-    }
+    // Required: minecraft only
+    if (!minecraft) return json({ error: "Missing required fields." }, 400);
 
+    // Validate minecraft username
     if (!/^[A-Za-z0-9_]{3,16}$/.test(minecraft)) {
       return json({ error: "Invalid Minecraft username." }, 400);
-    }
-
-    if (email && (email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))) {
-      return json({ error: "Invalid email." }, 400);
     }
 
     if (foundVia && foundVia.length > 500) {
@@ -54,7 +46,6 @@ async function router(request) {
     // Secrets (safe access)
     const turnstileSecret =
       typeof TURNSTILE_SECRET === "undefined" ? "" : TURNSTILE_SECRET;
-
     const discordWebhookUrl =
       typeof DISCORD_WEBHOOK_URL === "undefined" ? "" : DISCORD_WEBHOOK_URL;
 
@@ -79,9 +70,7 @@ async function router(request) {
           title: `Application: ${minecraft}`,
           fields: [
             { name: "Minecraft", value: minecraft, inline: true },
-            { name: "Email", value: email || "(none)", inline: true },
             { name: "Discord", value: discord || "(none)", inline: true },
-            { name: "Reddit", value: reddit || "(none)", inline: true },
             { name: "Found via", value: foundVia || "(none)", inline: false },
             { name: "IP", value: ip, inline: true },
             { name: "User-Agent", value: (ua || "(none)").slice(0, 120), inline: false },
@@ -101,10 +90,7 @@ async function router(request) {
       const text = await discordRes.text().catch(() => "");
       console.error("Discord webhook error:", discordRes.status, text);
       return json(
-        {
-          error: "Failed to notify moderators.",
-          detail: `Discord HTTP ${discordRes.status}: ${text.slice(0, 200)}`,
-        },
+        { error: "Failed to notify moderators.", detail: `Discord HTTP ${discordRes.status}` },
         502
       );
     }

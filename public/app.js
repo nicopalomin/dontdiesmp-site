@@ -9,43 +9,31 @@ function setStatus(msg) {
   statusEl.textContent = msg || "";
 }
 
-/**
- * Click-to-copy Server IP
- * Expects a button like:
- * <button class="server-ip__value" data-ip="play.dontdiesmp.com">play.dontdiesmp.com</button>
- */
+// Copy Server IP
 document.querySelectorAll(".server-ip__value").forEach((btn) => {
   btn.addEventListener("click", async () => {
-    const ip = btn.dataset.ip || btn.textContent.trim();
-    if (!ip) return;
-
-    // Prefer modern clipboard API
+    const ip = btn.dataset.ip || "play.dontdiesmp.com";
     try {
       await navigator.clipboard.writeText(ip);
-      const original = btn.textContent;
-      btn.textContent = "Copied!";
+      const label = btn.querySelector(".pill__label");
+      const original = label ? label.textContent : "";
+      if (label) label.textContent = "Copied!";
       btn.disabled = true;
       setTimeout(() => {
-        btn.textContent = original;
+        if (label) label.textContent = original || "Server IP";
         btn.disabled = false;
-      }, 1200);
-      return;
+      }, 1100);
     } catch {
-      // Fallback for older browsers / permissions
-      try {
-        const temp = document.createElement("input");
-        temp.value = ip;
-        temp.setAttribute("readonly", "");
-        temp.style.position = "absolute";
-        temp.style.left = "-9999px";
-        document.body.appendChild(temp);
-        temp.select();
-        document.execCommand("copy");
-        document.body.removeChild(temp);
-        alert("Copied: " + ip);
-      } catch {
-        alert("Copy failed. Server IP: " + ip);
-      }
+      // Fallback
+      const temp = document.createElement("input");
+      temp.value = ip;
+      temp.style.position = "absolute";
+      temp.style.left = "-9999px";
+      document.body.appendChild(temp);
+      temp.select();
+      document.execCommand("copy");
+      document.body.removeChild(temp);
+      alert("Copied: " + ip);
     }
   });
 });
@@ -59,16 +47,9 @@ form.addEventListener("submit", async (e) => {
     const formData = new FormData(form);
     const payload = Object.fromEntries(formData.entries());
 
-    // Turnstile token
+    // Turnstile token is required
     if (!payload["cf-turnstile-response"]) {
-      setStatus("Please complete the anti-bot check (Turnstile) and try again.");
-      submitBtn.disabled = false;
-      return;
-    }
-
-    // Terms checkbox (required by HTML, but keep a friendly message)
-    if (!payload.agree) {
-      setStatus("Please agree to the Terms of Service to continue.");
+      setStatus("Please complete the anti-bot check and try again.");
       submitBtn.disabled = false;
       return;
     }
@@ -88,7 +69,7 @@ form.addEventListener("submit", async (e) => {
     }
 
     form.reset();
-    setStatus("Your response has been recorded ✅ (We’ll review it soon!)");
+    setStatus("Application submitted ✅ Join Discord for whitelist updates.");
   } catch {
     setStatus("Network error. Please refresh and try again.");
     submitBtn.disabled = false;

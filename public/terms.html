@@ -10,24 +10,23 @@
 <body>
   <header class="topbar">
     <div class="topbar__inner">
-      <a class="brand" href="/">
-        <span class="brand__logo" aria-hidden="true">
-          <img src="/icon.svg" alt="" />
-        </span>
-        <span class="brand__text">
-          <span class="brand__title">Don't Die! SMP</span>
-          <span class="brand__tag">Terms of Service</span>
-        </span>
+      <a class="brand" href="/" aria-label="Back to application">
+        <span class="brand__mark"><img src="/icon.svg" alt="" /></span>
+        <span class="brand__name">Don't Die! SMP</span>
       </a>
-      <nav class="nav">
-        <a class="nav__discord" href="https://discord.gg/dontdiesmp" target="_blank" rel="noopener">Join Discord</a>
-        <a href="/privacy.html">Privacy</a>
-        <a href="/">Apply</a>
-      </nav>
+
+      <div class="topbar__actions">
+        <button type="button" class="pill pill--copy server-ip__value" data-ip="play.dontdiesmp.com">
+          <span class="pill__label">Server IP</span>
+          <span class="pill__value">play.dontdiesmp.com</span>
+          <span class="pill__hint">Click to copy</span>
+        </button>
+        <a class="btn btn--primary" href="https://discord.gg/dontdiesmp" target="_blank" rel="noopener">Join Discord</a>
+      </div>
     </div>
   </header>
 
-  <main class="wrap">
+  <main class="page">
     <section class="card doc">
       <h1>Terms of Service</h1>
       <p class="muted">Last updated: <span id="date"></span></p>
@@ -46,25 +45,23 @@
 
       <h2>3) Respect other players</h2>
       <p>
-        Please respect other players. No hate speech, harassment, doxxing, or targeted bullying. Keep the server fun and safe.
+        Please respect other players. No hate speech, harassment, doxxing, or targeted bullying.
       </p>
 
       <h2>4) Changes</h2>
       <p>
         We may update these Terms from time to time. Continued play means you accept the updated Terms.
       </p>
-
-      <p class="backlink"><a href="/">← Back to application</a></p>
     </section>
 
     <footer class="footer">
       <div class="footer__inner">
         <div class="footer__links">
-          <a href="https://discord.gg/dontdiesmp" target="_blank" rel="noopener">Join Discord</a>
-          <span class="sep">•</span>
           <a href="/privacy.html">Privacy Policy</a>
           <span class="sep">•</span>
           <a href="/terms.html">Terms of Service</a>
+          <span class="sep">•</span>
+          <a href="https://discord.gg/dontdiesmp" target="_blank" rel="noopener">Discord</a>
         </div>
         <small>© <span id="year"></span> Don't Die! SMP</small>
       </div>
@@ -74,6 +71,13 @@
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
     document.getElementById("date").textContent = new Date().toISOString().slice(0,10);
+
+    document.querySelectorAll(".server-ip__value").forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        const ip = btn.dataset.ip || "play.dontdiesmp.com";
+        try { await navigator.clipboard.writeText(ip); } catch {}
+      });
+    });
   </script>
 </body>
 </html>

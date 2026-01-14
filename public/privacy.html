@@ -10,74 +10,65 @@
 <body>
   <header class="topbar">
     <div class="topbar__inner">
-      <a class="brand" href="/">
-        <span class="brand__logo" aria-hidden="true">
-          <img src="/icon.svg" alt="" />
-        </span>
-        <span class="brand__text">
-          <span class="brand__title">Don't Die! SMP</span>
-          <span class="brand__tag">Privacy Policy</span>
-        </span>
+      <a class="brand" href="/" aria-label="Back to application">
+        <span class="brand__mark"><img src="/icon.svg" alt="" /></span>
+        <span class="brand__name">Don't Die! SMP</span>
       </a>
-      <nav class="nav">
-        <a class="nav__discord" href="https://discord.gg/dontdiesmp" target="_blank" rel="noopener">Join Discord</a>
-        <a href="/terms.html">Terms</a>
-        <a href="/">Apply</a>
-      </nav>
+
+      <div class="topbar__actions">
+        <button type="button" class="pill pill--copy server-ip__value" data-ip="play.dontdiesmp.com">
+          <span class="pill__label">Server IP</span>
+          <span class="pill__value">play.dontdiesmp.com</span>
+          <span class="pill__hint">Click to copy</span>
+        </button>
+        <a class="btn btn--primary" href="https://discord.gg/dontdiesmp" target="_blank" rel="noopener">Join Discord</a>
+      </div>
     </div>
   </header>
 
-  <main class="wrap">
+  <main class="page">
     <section class="card doc">
       <h1>Privacy Policy</h1>
       <p class="muted">Last updated: <span id="date"></span></p>
 
       <h2>What we collect</h2>
       <p>
-        We collect only the information you submit in the whitelist application form (like your Minecraft username).
-        Discord/Reddit/email are optional if you provide them.
+        We collect only what you submit in the whitelist application: your Minecraft username, and optionally your
+        Discord username and how you found the server.
       </p>
 
       <h2>How we use it</h2>
       <ul>
         <li>To review and approve/deny whitelist applications</li>
-        <li>To contact you if you provided contact info (optional)</li>
-        <li>To prevent spam/abuse (anti-bot checks)</li>
+        <li>To contact/notify you if you provided a Discord username (optional)</li>
+        <li>To prevent spam/abuse using anti-bot verification (Turnstile)</li>
       </ul>
 
       <h2>What we don’t do</h2>
       <ul>
         <li>We don’t sell your information</li>
-        <li>We don’t use your info for ads or marketing</li>
+        <li>We don’t use your information for advertising</li>
       </ul>
 
       <h2>Where submissions go</h2>
       <p>
-        Submissions may be sent to private moderation tools (for example, a private Discord mod channel) so staff can review them.
-      </p>
-
-      <h2>Retention</h2>
-      <p>
-        We keep submissions only as long as needed for moderation and server operations. If you want your submission removed,
-        contact staff and we’ll do our best to help.
+        Submissions may be forwarded to private moderation tools (for example, a private Discord mod channel) for review.
       </p>
 
       <h2>Contact</h2>
       <p>
-        For privacy questions, contact server staff (for example via Discord) and include your Minecraft username.
+        For privacy questions, contact staff via Discord and include your Minecraft username.
       </p>
-
-      <p class="backlink"><a href="/">← Back to application</a></p>
     </section>
 
     <footer class="footer">
       <div class="footer__inner">
         <div class="footer__links">
-          <a href="https://discord.gg/dontdiesmp" target="_blank" rel="noopener">Join Discord</a>
-          <span class="sep">•</span>
           <a href="/privacy.html">Privacy Policy</a>
           <span class="sep">•</span>
           <a href="/terms.html">Terms of Service</a>
+          <span class="sep">•</span>
+          <a href="https://discord.gg/dontdiesmp" target="_blank" rel="noopener">Discord</a>
         </div>
         <small>© <span id="year"></span> Don't Die! SMP</small>
       </div>
@@ -87,6 +78,14 @@
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
     document.getElementById("date").textContent = new Date().toISOString().slice(0,10);
+
+    // copy IP on doc page too
+    document.querySelectorAll(".server-ip__value").forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        const ip = btn.dataset.ip || "play.dontdiesmp.com";
+        try { await navigator.clipboard.writeText(ip); } catch {}
+      });
+    });
   </script>
 </body>
 </html>
