@@ -2,23 +2,29 @@
   /* Cloudflare-ish dark palette */
   --bg: #0b0f16;
   --bg2: #0e1523;
-  --card: rgba(255,255,255,0.04);
-  --card2: rgba(255,255,255,0.02);
-  --stroke: rgba(255,255,255,0.08);
-  --stroke2: rgba(255,255,255,0.12);
-  --text: rgba(255,255,255,0.92);
-  --muted: rgba(255,255,255,0.68);
-  --muted2: rgba(255,255,255,0.55);
 
-  --accent: #f6821f;       /* Cloudflare orange vibe */
+  --card: rgba(255,255,255,0.05);
+  --card2: rgba(255,255,255,0.03);
+
+  --stroke: rgba(255,255,255,0.10);
+  --stroke2: rgba(255,255,255,0.14);
+
+  --text: rgba(255,255,255,0.92);
+  --muted: rgba(255,255,255,0.70);
+  --muted2: rgba(255,255,255,0.58);
+
+  --accent: #f6821f;       /* Cloudflare orange */
   --accent2: rgba(246,130,31,0.18);
-  --good: #34d399;         /* subtle green */
+  --good: #34d399;
+
   --shadow: 0 16px 40px rgba(0,0,0,0.45);
 
   --radius: 14px;
   --radius2: 12px;
 
-  --max: 1040px;
+  /* Layout widths */
+  --max: 1100px;           /* overall page max */
+  --content: 860px;        /* main content max (cards/forms) */
 }
 
 *{ box-sizing: border-box; }
@@ -33,13 +39,13 @@ body{
   color: var(--text);
 }
 
-/* Topbar */
+/* ---------- Topbar ---------- */
 .topbar{
   position: sticky;
   top: 0;
   z-index: 30;
   backdrop-filter: blur(10px);
-  background: rgba(11,15,22,0.72);
+  background: rgba(11,15,22,0.78);
   border-bottom: 1px solid var(--stroke);
 }
 
@@ -53,6 +59,7 @@ body{
   gap: 14px;
 }
 
+/* Brand */
 .brand{
   display: flex;
   align-items: center;
@@ -89,6 +96,7 @@ body{
   text-overflow: ellipsis;
 }
 
+/* Actions (Server IP + Join Discord) */
 .topbar__actions{
   display: flex;
   align-items: center;
@@ -97,25 +105,106 @@ body{
   justify-content: flex-end;
 }
 
-/* Page layout */
+/* Buttons */
+.btn{
+  border-radius: 12px;
+  border: 1px solid transparent;
+  padding: 10px 12px;
+  font-weight: 900;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.btn--primary{
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.14);
+  color: var(--text);
+}
+.btn--primary:hover{
+  background: rgba(255,255,255,0.09);
+  border-color: rgba(255,255,255,0.18);
+}
+
+.btn--accent{
+  background: linear-gradient(180deg, rgba(246,130,31,1), rgba(246,130,31,0.86));
+  border-color: rgba(246,130,31,0.35);
+  color: #0b0f16;
+}
+.btn--accent:hover{
+  filter: brightness(1.03);
+  transform: translateY(-1px);
+}
+.btn:active{ transform: translateY(0px); }
+
+/* “Pill” control for Server IP */
+.pill{
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.04);
+  color: var(--text);
+  padding: 9px 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  text-align: left;
+  max-width: 520px;
+}
+.pill:hover{
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.18);
+}
+.pill__label{
+  font-weight: 900;
+  color: rgba(255,255,255,0.82);
+}
+.pill__value{
+  font-weight: 950;
+  letter-spacing: 0.2px;
+}
+.pill__hint{
+  font-size: 12px;
+  color: rgba(255,255,255,0.50);
+}
+
+/* ---------- Page layout ---------- */
 .page{
   max-width: var(--max);
   margin: 0 auto;
   padding: 22px 16px 42px;
 }
 
-/* Hero */
+/* Constrain the main sections so they don't span the whole browser */
+.hero,
+.card,
+.footer__inner{
+  max-width: var(--content);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ---------- Hero ---------- */
 .hero{
-  margin: 14px 0 18px;
+  margin: 14px auto 18px;
 }
+
 .hero__content{
-  padding: 10px 2px;
+  padding: 8px 2px;
 }
+
 .hero__title{
   margin: 0 0 8px;
   font-size: 34px;
   letter-spacing: 0.2px;
 }
+
 .hero__subtitle{
   margin: 0 0 14px;
   color: var(--muted);
@@ -133,6 +222,7 @@ body{
   background: rgba(255,255,255,0.03);
   border: 1px solid var(--stroke);
 }
+
 .notice__dot{
   width: 10px;
   height: 10px;
@@ -140,25 +230,33 @@ body{
   background: var(--good);
   box-shadow: 0 0 0 6px rgba(52,211,153,0.10);
 }
+
 .notice__text{
-  color: rgba(255,255,255,0.82);
+  color: rgba(255,255,255,0.84);
   font-weight: 650;
 }
+
+/* Make the "Open Discord" link readable (orange pill button) */
 .notice__link{
   margin-left: auto;
-  color: var(--text);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 12px;
+  border-radius: 12px;
+  background: rgba(246,130,31,0.18);
+  border: 1px solid rgba(246,130,31,0.40);
+  color: rgba(255,255,255,0.92);
   text-decoration: none;
-  font-weight: 800;
-  padding: 8px 10px;
-  border-radius: 10px;
-  border: 1px solid transparent;
+  font-weight: 900;
+  white-space: nowrap;
 }
 .notice__link:hover{
-  border-color: var(--stroke2);
-  background: rgba(255,255,255,0.03);
+  background: rgba(246,130,31,0.24);
+  border-color: rgba(246,130,31,0.55);
 }
 
-/* Cards */
+/* ---------- Cards ---------- */
 .card{
   border-radius: var(--radius);
   background: linear-gradient(180deg, var(--card), var(--card2));
@@ -168,55 +266,62 @@ body{
 }
 
 .card__head{
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
+
 .card__title{
   margin: 0 0 6px;
   font-size: 18px;
   letter-spacing: 0.2px;
 }
+
 .card__desc{
   margin: 0;
   color: var(--muted);
-  line-height: 1.45;
+  line-height: 1.5;
 }
 
-/* Form */
+/* ---------- Form ---------- */
 .form{
-  margin-top: 12px;
+  margin-top: 10px;
 }
 
+/* More spacing so it doesn't feel cramped */
 .form__grid{
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  gap: 16px;
 }
 
 .field{
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px; /* label/input/hint spacing */
 }
+
 .field--full{
   grid-column: 1 / -1;
 }
 
 .field__label{
-  font-weight: 800;
+  font-weight: 850;
+  letter-spacing: 0.1px;
 }
-.req{ color: var(--accent); font-weight: 900; }
-.opt{ color: var(--muted2); font-weight: 700; }
+
+.req{ color: var(--accent); font-weight: 950; }
+.opt{ color: var(--muted2); font-weight: 750; }
 
 input{
   width: 100%;
   padding: 12px 12px;
   border-radius: 12px;
-  border: 1px solid rgba(255,255,255,0.10);
-  background: rgba(0,0,0,0.18);
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(0,0,0,0.20);
   color: var(--text);
   outline: none;
 }
-input::placeholder{ color: rgba(255,255,255,0.35); }
+
+input::placeholder{ color: rgba(255,255,255,0.36); }
 
 input:focus{
   border-color: rgba(246,130,31,0.55);
@@ -226,15 +331,15 @@ input:focus{
 .field__hint{
   font-size: 12px;
   color: var(--muted2);
-  line-height: 1.35;
+  line-height: 1.45;
 }
 
 .form__row{
-  margin-top: 12px;
+  margin-top: 14px;
 }
 
 .form__actions{
-  margin-top: 14px;
+  margin-top: 16px;
   display: flex;
   align-items: center;
   gap: 14px;
@@ -245,15 +350,15 @@ input:focus{
   margin: 0;
   color: var(--muted2);
   font-size: 13px;
+  line-height: 1.4;
 }
+
 .form__legal a{
-  color: rgba(255,255,255,0.88);
+  color: rgba(255,255,255,0.90);
   text-decoration: none;
-  font-weight: 800;
+  font-weight: 850;
 }
-.form__legal a:hover{
-  text-decoration: underline;
-}
+.form__legal a:hover{ text-decoration: underline; }
 
 .status{
   margin: 12px 0 0;
@@ -261,82 +366,13 @@ input:focus{
   color: rgba(255,255,255,0.86);
 }
 
-/* Buttons */
-.btn{
-  border-radius: 12px;
-  border: 1px solid transparent;
-  padding: 10px 12px;
-  font-weight: 900;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  cursor: pointer;
-  user-select: none;
-  line-height: 1;
-}
-
-.btn--primary{
-  background: rgba(255,255,255,0.06);
-  border-color: rgba(255,255,255,0.12);
-  color: var(--text);
-}
-.btn--primary:hover{
-  background: rgba(255,255,255,0.09);
-  border-color: rgba(255,255,255,0.16);
-}
-
-.btn--accent{
-  background: linear-gradient(180deg, rgba(246,130,31,1), rgba(246,130,31,0.86));
-  border-color: rgba(246,130,31,0.35);
-  color: #0b0f16;
-}
-.btn--accent:hover{
-  filter: brightness(1.03);
-  transform: translateY(-1px);
-}
-.btn:active{ transform: translateY(0px); }
-
-/* “Pill” controls (Server IP) */
-.pill{
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.12);
-  background: rgba(255,255,255,0.04);
-  color: var(--text);
-  padding: 9px 12px;
-  display: inline-flex;
-  align-items: baseline;
-  gap: 10px;
-  cursor: pointer;
-  text-align: left;
-}
-.pill:hover{
-  background: rgba(255,255,255,0.06);
-  border-color: rgba(255,255,255,0.16);
-}
-.pill__label{
-  font-weight: 900;
-  color: rgba(255,255,255,0.80);
-}
-.pill__value{
-  font-weight: 950;
-  letter-spacing: 0.2px;
-}
-.pill__hint{
-  font-size: 12px;
-  color: rgba(255,255,255,0.45);
-  margin-left: 2px;
-}
-
-/* Footer */
+/* ---------- Footer ---------- */
 .footer{
   margin-top: 18px;
   padding-top: 14px;
 }
+
 .footer__inner{
-  max-width: var(--max);
-  margin: 0 auto;
   padding: 0 2px;
   display: flex;
   align-items: center;
@@ -345,10 +381,11 @@ input:focus{
   flex-wrap: wrap;
   color: var(--muted2);
 }
+
 .footer__links a{
   color: rgba(255,255,255,0.82);
   text-decoration: none;
-  font-weight: 800;
+  font-weight: 850;
 }
 .footer__links a:hover{ text-decoration: underline; }
 .sep{ opacity: 0.45; padding: 0 8px; }
@@ -357,37 +394,52 @@ input:focus{
 .doc h1{ margin: 0 0 6px; }
 .doc .muted{ color: var(--muted2); margin: 0 0 12px; }
 .doc h2{ margin-top: 18px; }
-.doc p, .doc li{ color: rgba(255,255,255,0.86); line-height: 1.6; }
+.doc p, .doc li{ color: rgba(255,255,255,0.86); line-height: 1.65; }
 .doc a{ color: rgba(255,255,255,0.90); font-weight: 850; text-decoration: none; }
 .doc a:hover{ text-decoration: underline; }
 
-/* Responsive */
+/* ---------- Responsive fixes ---------- */
 @media (max-width: 860px){
   .form__grid{ grid-template-columns: 1fr; }
   .field--full{ grid-column: auto; }
 }
 
-@media (max-width: 520px){
+/* This is the big “no overlap” fix for mobile header */
+@media (max-width: 600px){
   .topbar__inner{
-    padding: 12px 12px;
-    gap: 10px;
+    flex-direction: column;
+    align-items: stretch;
   }
-  .brand__name{
-    max-width: 160px;
-  }
+
   .topbar__actions{
     width: 100%;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
   }
+
   .pill{
-    flex: 1 1 auto;
+    width: 100%;
     justify-content: space-between;
-    gap: 8px;
+    max-width: none;
   }
-  .pill__hint{ display: none; } /* keep clean on small screens */
-  .btn--primary{
-    flex: 0 0 auto;
+
+  .pill__hint{
+    display: none; /* clean + avoids cramped text on small screens */
   }
-  .hero__title{ font-size: 30px; }
-  .notice__link{ margin-left: 0; }
+
+  .btn{
+    width: 100%;
+    justify-content: center;
+  }
+
+  .brand__name{
+    max-width: 100%;
+  }
+
+  .notice__link{
+    margin-left: 0;
+    width: 100%;
+    justify-content: center;
+  }
 }
