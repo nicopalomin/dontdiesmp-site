@@ -1,2 +1,447 @@
 /* PROOF TEST — if you can see a big red border, Pages is deploying this file */
 body { outline: 12px solid red !important; }
+:root{
+  /* Cloudflare-ish dark palette */
+  --bg: #0b0f16;
+  --bg2: #0e1523;
+
+  --card: rgba(255,255,255,0.05);
+  --card2: rgba(255,255,255,0.03);
+
+  --stroke: rgba(255,255,255,0.10);
+  --stroke2: rgba(255,255,255,0.14);
+
+  --text: rgba(255,255,255,0.92);
+  --muted: rgba(255,255,255,0.70);
+  --muted2: rgba(255,255,255,0.58);
+
+  --accent: #f6821f;       /* Cloudflare orange */
+  --accent2: rgba(246,130,31,0.18);
+  --good: #34d399;
+
+  --shadow: 0 16px 40px rgba(0,0,0,0.45);
+
+  --radius: 14px;
+  --radius2: 12px;
+
+  /* Layout widths */
+  --max: 1100px;           /* overall page max */
+  --content: 860px;        /* main content max (cards/forms) */
+}
+
+*{ box-sizing: border-box; }
+html,body{ height:100%; }
+body{
+  margin:0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background:
+    radial-gradient(900px 600px at 20% 0%, rgba(246,130,31,0.10), transparent 60%),
+    radial-gradient(900px 600px at 80% 20%, rgba(99,102,241,0.08), transparent 60%),
+    linear-gradient(180deg, var(--bg), var(--bg2));
+  color: var(--text);
+}
+
+/* ---------- Topbar ---------- */
+.topbar{
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  backdrop-filter: blur(10px);
+  background: rgba(11,15,22,0.78);
+  border-bottom: 1px solid var(--stroke);
+}
+
+.topbar__inner{
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+/* Brand */
+.brand{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: inherit;
+  text-decoration: none;
+  min-width: 0;
+}
+
+.brand__mark{
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  border-radius: 10px;
+  border: 1px solid var(--stroke2);
+  background: rgba(255,255,255,0.03);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  box-shadow: 0 10px 18px rgba(0,0,0,0.35);
+}
+.brand__mark img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.brand__name{
+  font-weight: 900;
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Actions (Server IP + Join Discord) */
+.topbar__actions{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+/* Buttons */
+.btn{
+  border-radius: 12px;
+  border: 1px solid transparent;
+  padding: 10px 12px;
+  font-weight: 900;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.btn--primary{
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.14);
+  color: var(--text);
+}
+.btn--primary:hover{
+  background: rgba(255,255,255,0.09);
+  border-color: rgba(255,255,255,0.18);
+}
+
+.btn--accent{
+  background: linear-gradient(180deg, rgba(246,130,31,1), rgba(246,130,31,0.86));
+  border-color: rgba(246,130,31,0.35);
+  color: #0b0f16;
+}
+.btn--accent:hover{
+  filter: brightness(1.03);
+  transform: translateY(-1px);
+}
+.btn:active{ transform: translateY(0px); }
+
+/* “Pill” control for Server IP */
+.pill{
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.04);
+  color: var(--text);
+  padding: 9px 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  text-align: left;
+  max-width: 520px;
+}
+.pill:hover{
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.18);
+}
+.pill__label{
+  font-weight: 900;
+  color: rgba(255,255,255,0.82);
+}
+.pill__value{
+  font-weight: 950;
+  letter-spacing: 0.2px;
+}
+.pill__hint{
+  font-size: 12px;
+  color: rgba(255,255,255,0.50);
+}
+
+/* ---------- Page layout ---------- */
+.page{
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 22px 16px 42px;
+}
+
+/* Constrain the main sections so they don't span the whole browser */
+.hero,
+.card,
+.footer__inner{
+  max-width: var(--content);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ---------- Hero ---------- */
+.hero{
+  margin: 14px auto 18px;
+}
+
+.hero__content{
+  padding: 8px 2px;
+}
+
+.hero__title{
+  margin: 0 0 8px;
+  font-size: 34px;
+  letter-spacing: 0.2px;
+}
+
+.hero__subtitle{
+  margin: 0 0 14px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* Notice strip */
+.notice{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 12px 12px;
+  border-radius: var(--radius2);
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--stroke);
+}
+
+.notice__dot{
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--good);
+  box-shadow: 0 0 0 6px rgba(52,211,153,0.10);
+}
+
+.notice__text{
+  color: rgba(255,255,255,0.84);
+  font-weight: 650;
+}
+
+/* Make the "Open Discord" link readable (orange pill button) */
+.notice__link{
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 12px;
+  border-radius: 12px;
+  background: rgba(246,130,31,0.18);
+  border: 1px solid rgba(246,130,31,0.40);
+  color: rgba(255,255,255,0.92);
+  text-decoration: none;
+  font-weight: 900;
+  white-space: nowrap;
+}
+.notice__link:hover{
+  background: rgba(246,130,31,0.24);
+  border-color: rgba(246,130,31,0.55);
+}
+
+/* ---------- Cards ---------- */
+.card{
+  border-radius: var(--radius);
+  background: linear-gradient(180deg, var(--card), var(--card2));
+  border: 1px solid var(--stroke);
+  box-shadow: var(--shadow);
+  padding: 18px;
+}
+
+.card__head{
+  margin-bottom: 14px;
+}
+
+.card__title{
+  margin: 0 0 6px;
+  font-size: 18px;
+  letter-spacing: 0.2px;
+}
+
+.card__desc{
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* ---------- Form ---------- */
+.form{
+  margin-top: 10px;
+}
+
+/* More spacing so it doesn't feel cramped */
+.form__grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.field{
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* label/input/hint spacing */
+}
+
+.field--full{
+  grid-column: 1 / -1;
+}
+
+.field__label{
+  font-weight: 850;
+  letter-spacing: 0.1px;
+}
+
+.req{ color: var(--accent); font-weight: 950; }
+.opt{ color: var(--muted2); font-weight: 750; }
+
+input{
+  width: 100%;
+  padding: 12px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(0,0,0,0.20);
+  color: var(--text);
+  outline: none;
+}
+
+input::placeholder{ color: rgba(255,255,255,0.36); }
+
+input:focus{
+  border-color: rgba(246,130,31,0.55);
+  box-shadow: 0 0 0 4px rgba(246,130,31,0.14);
+}
+
+.field__hint{
+  font-size: 12px;
+  color: var(--muted2);
+  line-height: 1.45;
+}
+
+.form__row{
+  margin-top: 14px;
+}
+
+.form__actions{
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.form__legal{
+  margin: 0;
+  color: var(--muted2);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.form__legal a{
+  color: rgba(255,255,255,0.90);
+  text-decoration: none;
+  font-weight: 850;
+}
+.form__legal a:hover{ text-decoration: underline; }
+
+.status{
+  margin: 12px 0 0;
+  min-height: 22px;
+  color: rgba(255,255,255,0.86);
+}
+
+/* ---------- Footer ---------- */
+.footer{
+  margin-top: 18px;
+  padding-top: 14px;
+}
+
+.footer__inner{
+  padding: 0 2px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  color: var(--muted2);
+}
+
+.footer__links a{
+  color: rgba(255,255,255,0.82);
+  text-decoration: none;
+  font-weight: 850;
+}
+.footer__links a:hover{ text-decoration: underline; }
+.sep{ opacity: 0.45; padding: 0 8px; }
+
+/* Doc pages */
+.doc h1{ margin: 0 0 6px; }
+.doc .muted{ color: var(--muted2); margin: 0 0 12px; }
+.doc h2{ margin-top: 18px; }
+.doc p, .doc li{ color: rgba(255,255,255,0.86); line-height: 1.65; }
+.doc a{ color: rgba(255,255,255,0.90); font-weight: 850; text-decoration: none; }
+.doc a:hover{ text-decoration: underline; }
+
+/* ---------- Responsive fixes ---------- */
+@media (max-width: 860px){
+  .form__grid{ grid-template-columns: 1fr; }
+  .field--full{ grid-column: auto; }
+}
+
+/* This is the big “no overlap” fix for mobile header */
+@media (max-width: 600px){
+  .topbar__inner{
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .topbar__actions{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .pill{
+    width: 100%;
+    justify-content: space-between;
+    max-width: none;
+  }
+
+  .pill__hint{
+    display: none; /* clean + avoids cramped text on small screens */
+  }
+
+  .btn{
+    width: 100%;
+    justify-content: center;
+  }
+
+  .brand__name{
+    max-width: 100%;
+  }
+
+  .notice__link{
+    margin-left: 0;
+    width: 100%;
+    justify-content: center;
+  }
+}
